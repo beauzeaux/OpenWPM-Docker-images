@@ -1,0 +1,21 @@
+sparkMaster:
+  image: beauzeaux/spark-master
+  ports:
+    - "8080:8080"
+    - "7077:7077"
+  net: "host"
+sparkWorker:
+  image: beauzeaux/spark-worker
+  environment:
+    SPARK_MASTER_IP: master
+    SPARK_MASTER_PORT: 7077
+  net: "host"
+notebook:
+  image: beauzeaux/notebook
+  net: "host"
+  ports:
+    - "8083:8888"
+  environment:
+    SPARK_MASTER_IP: master
+    SPARK_MASTER_PORT: 7077
+    PASSWORD: password

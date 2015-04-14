@@ -1,0 +1,17 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "master"
+  config.vm.network "forwarded_port", guest: 8080, host:8080
+  config.vm.network "forwarded_port", guest: 7077, host:7077
+
+  config.vm.provider "virtualbox" do |vb|
+  	vb.memory = 2048
+  end
+
+  config.vm.provision "docker" do |d|
+    d.build_image "/vagrant/master", args: "-t spark-server"
+    d.build_image "/vagrant/worker", args: "-t spark-worker"
+    d.run "spark-server", daemonize: true, args: "-h master -p 8080:8080 -p 7077:7077"
+    d.run "spark-worker", daemonize: true, args: "--link=spark-server:master -e SPARK_MASTER_IP=master -e SPARK_MASTER_PORT=7077"
+  end
+end

@@ -1,0 +1,6 @@
+sparkWorker:
+  image: beauzeaux/spark-worker
+  net: "host"
+  environment:
+    SPARK_MASTER_IP: master
+    SPARK_MASTER_PORT: 7077

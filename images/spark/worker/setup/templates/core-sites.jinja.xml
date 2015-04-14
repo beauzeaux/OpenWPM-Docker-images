@@ -1,0 +1,14 @@
+<configuration>
+	<property>
+	<name>fs.gs.impl</name>
+	<value>com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem</value>
+	</property>
+	<property>
+	<name>fs.gs.project.id</name>
+	<value>{{GCE_PROJECT_ID}}</value>
+	</property>
+	<property>
+	<name>fs.gs.system.bucket</name>
+	<value>{{GCS_BUCKET_ID}}</value>
+	</property>
+</configuration>
