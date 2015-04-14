@@ -19,7 +19,8 @@ RUN pip install \
 	j2cli
 
 COPY ./setup /opt/setup/
-CMD ["/opt/setup/startup.sh"]
+RUN chmod +x /opt/setup/startup.sh
+ENTRYPOINT ["/opt/setup/startup.sh"]
 
 # set spark paths
 ENV PYTHONPATH $PYTHONPATH:/opt/spark/python/lib/py4j-0.8.2.1-src.zip:/opt/spark/python
